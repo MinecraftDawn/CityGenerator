@@ -1,3 +1,5 @@
 name: cityGenerator
 main: main.cityGenerator.CityGenerator
 version: 0.0.1-pre-alpha
+commands:
+  test:
