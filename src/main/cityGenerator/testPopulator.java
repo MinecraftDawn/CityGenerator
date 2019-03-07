@@ -17,9 +17,7 @@ public class testPopulator extends BlockPopulator {
                 int Y = 1;
                 for (int j = world.getMaxHeight() - 1; chunk.getBlock(X, j, Z).getType() == Material.AIR; j--,Y=j);
 
-                boolean b = world.generateTree(chunk.getBlock(X, Y, Z).getLocation(), TreeType.TREE);
-                Bukkit.getServer().getLogger().info(b ? "成功" : "失敗");
-
+                world.generateTree(chunk.getBlock(X, Y, Z).getLocation(), TreeType.TREE);
             }
         }
     }
