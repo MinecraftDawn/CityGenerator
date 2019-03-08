@@ -1,41 +1,52 @@
 package main.cityGenerator;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.util.noise.SimplexOctaveGenerator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class testGenerator extends ChunkGenerator {
 
-    int currentHeight = 80;
+    int height = 60;
+    int streeWidth = 7;
+    int buildingWidth = 30;
 
     @Override
     public ChunkData generateChunkData(World world, Random random, int chunkX, int chunkZ, BiomeGrid biome) {
-        SimplexOctaveGenerator generator = new SimplexOctaveGenerator(new Random(world.getSeed()), 8);
         ChunkData chunk = createChunkData(world);
-        generator.setScale(0.005D);
 
-        for (int X = 0; X < 16; X++)
-            for (int Z = 0; Z < 16; Z++) {
-                currentHeight = (int) (generator.noise(chunkX*16+X, chunkZ*16+Z, 0.5D, 0.5D)*15D+50D);
-                chunk.setBlock(X, currentHeight, Z, Material.GRASS);
-                chunk.setBlock(X, currentHeight-1, Z, Material.DIRT);
-                for (int i = currentHeight-2; i > 0; i--)
-                    chunk.setBlock(X, i, Z, Material.STONE);
-                chunk.setBlock(X, 0, Z, Material.BEDROCK);
+        for (int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                chunk.setBlock(x, 0, z, Material.BEDROCK);
+                for (int y = 1; y < height / 3; y++) {
+                    chunk.setBlock(x, y, z, Material.STONE);
+                }
+                for (int y = height / 3; y < height; y++) {
+                    chunk.setBlock(x, y, z, Material.DIRT);
+                }
+
+                int currentX = chunkX * 16 + x;
+                int currentZ = chunkZ * 16 + z;
+                if (Math.abs(currentX % buildingWidth) < streeWidth || Math.abs(currentZ % buildingWidth) < streeWidth) {
+                    chunk.setBlock(x, height, z, Material.COAL_BLOCK);
+                } else {
+                    chunk.setBlock(x, height, z, Material.QUARTZ_BLOCK);
+                }
             }
+        }
+
         return chunk;
     }
 
-    @Override
-    public List<BlockPopulator> getDefaultPopulators(World world) {
-        return Arrays.asList((BlockPopulator)new testPopulator());
-    }
-
+//    @Override
+//    public List<BlockPopulator> getDefaultPopulators(World world) {
+//        return Arrays.asList((BlockPopulator) new testPopulator());
+//    }
 }
