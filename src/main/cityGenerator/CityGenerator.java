@@ -1,5 +1,6 @@
 package main.cityGenerator;
 
+import main.cityGenerator.generator.CityChunkGenerator;
 import org.bukkit.WorldCreator;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -9,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class CityGenerator extends JavaPlugin {
 
-    static Plugin plugin;
+    public static Plugin plugin;
 
     @Override
     public void onEnable() {

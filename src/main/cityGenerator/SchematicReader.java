@@ -21,18 +21,18 @@ public class SchematicReader {
         for (int x = 0; x < sizeX; x++)
             for (int y = 0; y < sizeY; y++)
                 for (int z = 0; z < sizeZ; z++) {
-                    BaseBlock baseBlock = cc.getBlock(size);
+                    BaseBlock baseBlock = cc.getBlock(new Vector(x,y,z));
                     blockID[x][y][z] = baseBlock.getId();
                     blockData[x][y][z] = (byte) baseBlock.getData();
                 }
     }
 
-    public int[][][] getBlockID(){
-        return blockID;
+    public int getBlockID(int x,int y,int z){
+        return blockID[x][y][z];
     }
 
-    public byte[][][] getBlockData(){
-        return blockData;
+    public byte getBlockData(int x,int y,int z){
+        return blockData[x][y][z];
     }
 
     public Vector getSize(){
