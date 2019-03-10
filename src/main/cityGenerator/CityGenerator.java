@@ -18,7 +18,7 @@ public class CityGenerator extends JavaPlugin {
 
     @Override
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
-        return new testGenerator();
+        return new CityChunkGenerator();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class CityGenerator extends JavaPlugin {
 
         if (args.length > 0) {
             WorldCreator worldCreator = new WorldCreator(args[0]);
-            worldCreator.generator(new testGenerator());
+            worldCreator.generator(new CityChunkGenerator());
             worldCreator.createWorld();
         }
         return true;
