@@ -16,7 +16,7 @@ import java.util.Random;
 public class CityChunkGenerator extends ChunkGenerator {
 
     int height = 60;
-    int streetWidth = 10;
+    int streetWidth = 20;
     int buildingWidth = 30;
 
     @Override
