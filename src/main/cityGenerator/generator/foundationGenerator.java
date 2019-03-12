@@ -1,10 +1,14 @@
 package main.cityGenerator.generator;
 
+import main.cityGenerator.CityGenerator;
+import main.cityGenerator.SchematicFileLoader;
+import main.cityGenerator.SchematicReader;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator.*;
 
+import java.io.File;
 import java.util.Random;
 
 public class foundationGenerator implements IGenerator {
@@ -17,6 +21,10 @@ public class foundationGenerator implements IGenerator {
         chunk.setRegion(0, 1, 0, 16, height / 3, 16, Material.STONE);
         //設置上層泥土
         chunk.setRegion(0, height / 3, 0, 16, height, 16, Material.DIRT);
+
+        File schematicFile = new File(CityGenerator.plugin.getDataFolder() + File.separator + "Cube.schematic");
+        SchematicFileLoader scheFileLoader = new SchematicFileLoader(schematicFile);
+        SchematicReader scheReader = scheFileLoader.getSchematicInfo();
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
@@ -32,10 +40,20 @@ public class foundationGenerator implements IGenerator {
                 } else {
                     //設置建築基底石英磚
                     chunk.setBlock(x, height, z, Material.QUARTZ_BLOCK);
+
+                    for (int y = 0; y < scheReader.getSize().getY(); y++) {
+                        int buildingX = (modX - streetWidth) % (int) scheReader.getSize().getX();
+                        int buildingZ = (modZ - streetWidth) % (int) scheReader.getSize().getZ();
+
+                        int BlockID = scheReader.getBlockID(buildingX, y, buildingZ);
+                        byte BlockData = scheReader.getBlockData(buildingX, y, buildingZ);
+
+                        chunk.setBlock(x, y + height + 1, z, BlockID, BlockData);
+                    }
                 }
+
             }
         }
-
 
 
         return chunk;
