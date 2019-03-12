@@ -9,6 +9,7 @@ import java.util.Random;
 public interface IGenerator {
     int height = 60;
     int streetWidth = 20;
-    int buildingWidth = 50;
+    int cubeSize = 10;
+    int buildingWidth = cubeSize * 5;
     public ChunkData generate(ChunkData chunk, World world, Random random, int chunkX, int chunkZ, ChunkGenerator.BiomeGrid biome);
 }

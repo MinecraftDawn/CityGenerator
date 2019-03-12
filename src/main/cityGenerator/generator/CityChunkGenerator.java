@@ -13,10 +13,6 @@ import java.util.Random;
 
 public class CityChunkGenerator extends ChunkGenerator {
 
-    private int height = 60;
-    private int streetWidth = 20;
-    private int buildingWidth = 50;
-
     @Override
     public ChunkData generateChunkData(World world, Random random, int chunkX, int chunkZ, BiomeGrid biome) {
         ChunkData chunk = createChunkData(world);
