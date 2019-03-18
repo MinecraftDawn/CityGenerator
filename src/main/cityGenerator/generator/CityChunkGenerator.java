@@ -1,9 +1,9 @@
 package main.cityGenerator.generator;
 
+import main.cityGenerator.BuildDecide;
 import main.cityGenerator.CityGenerator;
 import main.cityGenerator.SchematicFileLoader;
 import main.cityGenerator.SchematicReader;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.util.noise.SimplexOctaveGenerator;
@@ -25,6 +25,7 @@ public class CityChunkGenerator extends ChunkGenerator {
 
 
         chunk = new foundationGenerator().generate(chunk,world,random,chunkX,chunkZ,biome);
+        chunk = new BuildDecide().generate(chunk,world,random,chunkX,chunkZ,biome);
 
 
         /*

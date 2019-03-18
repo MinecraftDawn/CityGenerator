@@ -3,7 +3,6 @@ package main.cityGenerator.generator;
 import main.cityGenerator.CityGenerator;
 import main.cityGenerator.SchematicFileLoader;
 import main.cityGenerator.SchematicReader;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator.BiomeGrid;
@@ -44,9 +43,9 @@ public class foundationGenerator implements IGenerator {
                     chunk.setBlock(x, height, z, Material.QUARTZ_BLOCK);
 
 
-                    for (int y = 0; y < scheReader.getSize().getY(); y++) {
-                        int buildingX = (modX - streetWidth) % (int) scheReader.getSize().getX();
-                        int buildingZ = (modZ - streetWidth) % (int) scheReader.getSize().getZ();
+                    for (int y = 0; y < scheReader.getSize().getBlockY(); y++) {
+                        int buildingX = (modX - streetWidth) % scheReader.getSize().getBlockX();
+                        int buildingZ = (modZ - streetWidth) % scheReader.getSize().getBlockZ();
 
                         int BlockID = scheReader.getBlockID(buildingX, y, buildingZ);
                         byte BlockData = scheReader.getBlockData(buildingX, y, buildingZ);
