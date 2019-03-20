@@ -1,7 +1,6 @@
 package main.cityGenerator;
 
 import main.cityGenerator.generator.IGenerator;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator.BiomeGrid;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
@@ -13,9 +12,11 @@ public class BuildDecide implements IGenerator {
 
     @Override
     public ChunkData generate(ChunkData chunk, World world, Random random, int chunkX, int chunkZ, BiomeGrid biome) {
-        File schematicFile = new File(CityGenerator.plugin.getDataFolder() + File.separator + "Block.schematic");
+        File schematicFile = new File(CityGenerator.plugin.getDataFolder() + File.separator + "3.schematic");
         SchematicFileLoader scheFileLoader = new SchematicFileLoader(schematicFile);
         SchematicReader scheReader = scheFileLoader.getSchematicInfo();
+
+
 
 
         for (int x = 0; x < 16; x++) {
@@ -28,12 +29,10 @@ public class BuildDecide implements IGenerator {
 
                 if (modX < streetWidth || modZ < streetWidth) {
                     //設置道路煤炭磚
-//                    chunk.setBlock(x, height, z, Material.COAL_BLOCK);
+                    //chunk.setBlock(x, height, z, Material.COAL_BLOCK);
                 } else {
-
                     //設置建築基底石英磚
                     //chunk.setBlock(x, height, z, Material.QUARTZ_BLOCK);
-
 
                     for (int y = 0; y < scheReader.getSize().getBlockY(); y++) {
                         int buildingX = (modX - streetWidth) % scheReader.getSize().getBlockX();
@@ -44,11 +43,11 @@ public class BuildDecide implements IGenerator {
 
                         chunk.setBlock(x, y + height + 2, z, BlockID, BlockData);
                     }
-
                 }
-
             }
+
         }
+
         /*
         if (chunkX < 0 || chunkZ < 0) return chunk;
 
@@ -84,7 +83,6 @@ public class BuildDecide implements IGenerator {
                             chunk.setBlock(x%16, y, z%16, BlockID, BlockData);
                         }
                     }
-
                 }
 
 
