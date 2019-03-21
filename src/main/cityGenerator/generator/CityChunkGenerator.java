@@ -23,8 +23,9 @@ public class CityChunkGenerator extends ChunkGenerator {
         SchematicFileLoader scheFileLoader = new SchematicFileLoader(schematicFile);
         SchematicReader scheReader = scheFileLoader.getSchematicInfo();
 
-
+        //生成地基
         chunk = new foundationGenerator().generate(chunk,world,random,chunkX,chunkZ,biome);
+        //生成建築
         chunk = new BuildDecide().generate(chunk,world,random,chunkX,chunkZ,biome);
 
 

@@ -16,9 +16,6 @@ public class BuildDecide implements IGenerator {
         SchematicFileLoader scheFileLoader = new SchematicFileLoader(schematicFile);
         SchematicReader scheReader = scheFileLoader.getSchematicInfo();
 
-
-
-
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 int currentX = chunkX * 16 + x;
