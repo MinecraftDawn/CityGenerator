@@ -1,14 +1,9 @@
 package main.cityGenerator.generator;
 
 import main.cityGenerator.BuildDecide;
-import main.cityGenerator.CityGenerator;
-import main.cityGenerator.SchematicFileLoader;
-import main.cityGenerator.SchematicReader;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
-import org.bukkit.util.noise.SimplexOctaveGenerator;
 
-import java.io.File;
 import java.util.Random;
 
 public class CityChunkGenerator extends ChunkGenerator {
@@ -17,16 +12,10 @@ public class CityChunkGenerator extends ChunkGenerator {
     public ChunkData generateChunkData(World world, Random random, int chunkX, int chunkZ, BiomeGrid biome) {
         ChunkData chunk = createChunkData(world);
 
-        SimplexOctaveGenerator generator = new SimplexOctaveGenerator(new Random(world.getSeed()), 8);
-
-        File schematicFile = new File(CityGenerator.plugin.getDataFolder() + File.separator + "Block.schematic");
-        SchematicFileLoader scheFileLoader = new SchematicFileLoader(schematicFile);
-        SchematicReader scheReader = scheFileLoader.getSchematicInfo();
-
         //生成地基
-        chunk = new foundationGenerator().generate(chunk,world,random,chunkX,chunkZ,biome);
+        chunk = new foundationGenerator().generate(chunk, world, random, chunkX, chunkZ, biome);
         //生成建築
-        chunk = new BuildDecide().generate(chunk,world,random,chunkX,chunkZ,biome);
+        chunk = new BuildDecide().generate(chunk, world, random, chunkX, chunkZ, biome);
 
 
         /*

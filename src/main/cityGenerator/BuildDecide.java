@@ -25,11 +25,7 @@ public class BuildDecide implements IGenerator {
                 int modZ = Math.abs(currentZ % (buildingWidth + streetWidth));
 
                 if (modX < streetWidth || modZ < streetWidth) {
-                    //設置道路煤炭磚
-                    //chunk.setBlock(x, height, z, Material.COAL_BLOCK);
                 } else {
-                    //設置建築基底石英磚
-                    //chunk.setBlock(x, height, z, Material.QUARTZ_BLOCK);
 
                     for (int y = 0; y < scheReader.getSize().getBlockY(); y++) {
                         int buildingX = (modX - streetWidth) % scheReader.getSize().getBlockX();
