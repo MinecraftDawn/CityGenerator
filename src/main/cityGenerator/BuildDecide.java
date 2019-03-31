@@ -16,6 +16,9 @@ public class BuildDecide implements IGenerator {
         SchematicFileLoader scheFileLoader = new SchematicFileLoader(schematicFile);
         SchematicReader scheReader = scheFileLoader.getSchematicInfo();
 
+        int scheSizeX = scheReader.getSize().getBlockX();
+        int scheSizeZ = scheReader.getSize().getBlockZ();
+
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 int currentX = chunkX * 16 + x;
@@ -27,15 +30,18 @@ public class BuildDecide implements IGenerator {
                 if (modX < streetWidth || modZ < streetWidth) {
                 } else {
 
-                    for (int y = 0; y < scheReader.getSize().getBlockY(); y++) {
-                        int buildingX = (modX - streetWidth) % scheReader.getSize().getBlockX();
-                        int buildingZ = (modZ - streetWidth) % scheReader.getSize().getBlockZ();
+                    if (modX - streetWidth > (buildingWidth - scheSizeX) / 2 && modX - streetWidth < (buildingWidth + scheSizeX) / 2
+                    && modZ - streetWidth > (buildingWidth - scheSizeZ) / 2 && modZ - streetWidth < (buildingWidth + scheSizeZ) / 2)
 
-                        int BlockID = scheReader.getBlockID(buildingX, y, buildingZ);
-                        byte BlockData = scheReader.getBlockData(buildingX, y, buildingZ);
+                        for (int y = 0; y < scheReader.getSize().getBlockY(); y++) {
+                            int buildingX = (modX - streetWidth) % scheSizeX;
+                            int buildingZ = (modZ - streetWidth) % scheSizeZ;
 
-                        chunk.setBlock(x, y + height + 2, z, BlockID, BlockData);
-                    }
+                            int BlockID = scheReader.getBlockID(buildingX, y, buildingZ);
+                            byte BlockData = scheReader.getBlockData(buildingX, y, buildingZ);
+
+                            chunk.setBlock(x, y + height + 2, z, BlockID, BlockData);
+                        }
                 }
             }
 

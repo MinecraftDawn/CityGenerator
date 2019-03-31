@@ -10,6 +10,6 @@ public interface IGenerator {
     int height = 60;
     int streetWidth = 20;
     int cubeSize = 10;
-    int buildingWidth = cubeSize * 5;
+    int buildingWidth = cubeSize * 10;
     public ChunkData generate(ChunkData chunk, World world, Random random, int chunkX, int chunkZ, ChunkGenerator.BiomeGrid biome);
 }
