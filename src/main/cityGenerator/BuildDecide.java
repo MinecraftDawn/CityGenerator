@@ -31,17 +31,19 @@ public class BuildDecide implements IGenerator {
                 } else {
 
                     if (modX - streetWidth > (buildingWidth - scheSizeX) / 2 && modX - streetWidth < (buildingWidth + scheSizeX) / 2
-                    && modZ - streetWidth > (buildingWidth - scheSizeZ) / 2 && modZ - streetWidth < (buildingWidth + scheSizeZ) / 2)
+                            && modZ - streetWidth > (buildingWidth - scheSizeZ) / 2 && modZ - streetWidth < (buildingWidth + scheSizeZ) / 2) {
+
+                        int buildingX = (modX - streetWidth + (buildingWidth - scheSizeX)) % scheSizeX;
+                        int buildingZ = (modZ - streetWidth + (buildingWidth - scheSizeZ)) % scheSizeZ;
 
                         for (int y = 0; y < scheReader.getSize().getBlockY(); y++) {
-                            int buildingX = (modX - streetWidth) % scheSizeX;
-                            int buildingZ = (modZ - streetWidth) % scheSizeZ;
 
                             int BlockID = scheReader.getBlockID(buildingX, y, buildingZ);
                             byte BlockData = scheReader.getBlockData(buildingX, y, buildingZ);
 
                             chunk.setBlock(x, y + height + 2, z, BlockID, BlockData);
                         }
+                    }
                 }
             }
 
