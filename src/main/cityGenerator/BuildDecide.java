@@ -24,11 +24,12 @@ public class BuildDecide implements IGenerator {
                 int currentX = chunkX * 16 + x;
                 int currentZ = chunkZ * 16 + z;
 
+                //計算目前座標轉換成自定方塊網格後的X與Z
                 int modX = Math.abs(currentX % (buildingWidth + streetWidth));
                 int modZ = Math.abs(currentZ % (buildingWidth + streetWidth));
 
                 if (modX < streetWidth || modZ < streetWidth) {
-                } else {
+                } else {//若X與Z同時不在街道範圍
 
                     if (modX - streetWidth > (buildingWidth - scheSizeX) / 2 && modX - streetWidth < (buildingWidth + scheSizeX) / 2
                             && modZ - streetWidth > (buildingWidth - scheSizeZ) / 2 && modZ - streetWidth < (buildingWidth + scheSizeZ) / 2) {
