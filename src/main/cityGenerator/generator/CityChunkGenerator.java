@@ -15,7 +15,7 @@ public class CityChunkGenerator extends ChunkGenerator {
         //生成地基
         chunk = new foundationGenerator().generate(chunk, world, random, chunkX, chunkZ, biome);
         //生成建築
-        chunk = new BuildDecide().generate(chunk, world, random, chunkX, chunkZ, biome);
+        chunk = new BuildingGenerator().generate(chunk, world, random, chunkX, chunkZ, biome);
 
 
         /*
