@@ -11,11 +11,11 @@ public class BuildDecide implements IGenerator {
 
     @Override
     public ChunkData generate(ChunkData chunk, World world, Random random, int chunkX, int chunkZ, BiomeGrid biome) {
-        return null;
+        return chunk;
     }
 
-    public int getBuildType(int x, int y, int z) {
-        return (x + z) % 10;
+    public static int getBuildType(int x, int y, int z) {
+        return (x / (streetWidth + buildingWidth) + z / (streetWidth + buildingWidth)) % 2;
     }
 
 }

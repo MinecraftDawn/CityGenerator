@@ -1,5 +1,6 @@
 package main.cityGenerator.generator;
 
+import main.cityGenerator.BuildDecide;
 import main.cityGenerator.CityGenerator;
 import main.cityGenerator.SchematicFileLoader;
 import main.cityGenerator.SchematicReader;
@@ -14,7 +15,20 @@ public class BuildingGenerator implements IGenerator {
     public ChunkGenerator.ChunkData generate(ChunkGenerator.ChunkData chunk, World world, Random random, int chunkX, int chunkZ, ChunkGenerator.BiomeGrid biome) {
         File schematicFile = new File(CityGenerator.plugin.getDataFolder() + File.separator + "3.schematic");
         SchematicFileLoader scheFileLoader = new SchematicFileLoader(schematicFile);
+
+        File schematicFile2 = new File(CityGenerator.plugin.getDataFolder() + File.separator + "5.schematic");
+        SchematicFileLoader scheFileLoader2 = new SchematicFileLoader(schematicFile2);
+
         SchematicReader scheReader = scheFileLoader.getSchematicInfo();
+
+        /*
+            Test Code
+         */
+        if (BuildDecide.getBuildType(chunkX * 16, 1, chunkZ * 16) == 0) {
+            scheReader = scheFileLoader.getSchematicInfo();
+        } else {
+            scheReader = scheFileLoader2.getSchematicInfo();
+        }
 
         int scheSizeX = scheReader.getSize().getBlockX();
         int scheSizeZ = scheReader.getSize().getBlockZ();
@@ -24,8 +38,11 @@ public class BuildingGenerator implements IGenerator {
         int buildEndX = (buildingWidth + scheSizeX) / 2;
         int buildEndZ = (buildingWidth + scheSizeZ) / 2;
 
+
+
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
+
                 int currentX = chunkX * 16 + x;
                 int currentZ = chunkZ * 16 + z;
 

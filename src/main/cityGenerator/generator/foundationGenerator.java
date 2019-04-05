@@ -24,6 +24,7 @@ public class foundationGenerator implements IGenerator {
 
         File schematicFile = new File(CityGenerator.plugin.getDataFolder() + File.separator + "Cube.schematic");
         SchematicFileLoader scheFileLoader = new SchematicFileLoader(schematicFile);
+        if (scheFileLoader == null) return chunk;
         SchematicReader scheReader = scheFileLoader.getSchematicInfo();
 
         for (int x = 0; x < 16; x++) {
