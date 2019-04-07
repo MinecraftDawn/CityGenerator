@@ -2,8 +2,8 @@ package main.cityGenerator.generator;
 
 import main.cityGenerator.BuildDecide;
 import main.cityGenerator.CityGenerator;
-import main.cityGenerator.SchematicFileLoader;
-import main.cityGenerator.SchematicReader;
+import main.cityGenerator.fileProcess.SchematicFileLoader;
+import main.cityGenerator.fileProcess.SchematicReader;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 

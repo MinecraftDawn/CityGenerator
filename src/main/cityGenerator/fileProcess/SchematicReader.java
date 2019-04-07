@@ -1,4 +1,4 @@
-package main.cityGenerator;
+package main.cityGenerator.fileProcess;
 
 import com.sk89q.worldedit.CuboidClipboard;
 import com.sk89q.worldedit.Vector;
