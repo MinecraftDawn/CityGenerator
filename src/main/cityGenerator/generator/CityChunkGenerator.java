@@ -1,6 +1,5 @@
 package main.cityGenerator.generator;
 
-import main.cityGenerator.BuildDecide;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 

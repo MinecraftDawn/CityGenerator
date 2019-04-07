@@ -39,7 +39,6 @@ public class BuildingGenerator implements IGenerator {
         int buildEndZ = (buildingWidth + scheSizeZ) / 2;
 
 
-
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
 
