@@ -1,5 +1,6 @@
 package main.cityGenerator;
 
+import main.cityGenerator.fileProcess.SchematicManager;
 import main.cityGenerator.generator.CityChunkGenerator;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
@@ -10,14 +11,17 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.LinkedList;
 
 public class CityGenerator extends JavaPlugin {
 
     public static Plugin plugin;
+    public static LinkedList<SchematicManager> schematics;
 
     @Override
     public void onEnable() {
         plugin = this;
+        schematics = new LinkedList<>();
         loadAllSchematic();
     }
 
@@ -37,20 +41,13 @@ public class CityGenerator extends JavaPlugin {
         return true;
     }
 
-    private void loadAllSchematic(){
-        /*
-        Test Code
-         */
-        Bukkit.getServer().getLogger().info(plugin.getDataFolder().toString());
-        Bukkit.getServer().getLogger().info(plugin.getDataFolder().getName());
-
+    private void loadAllSchematic() {
         File fileList = new File(plugin.getDataFolder().toString());
 
-        for(File f : fileList.listFiles()){
-            if(f.isDirectory()){
-                Bukkit.getServer().getLogger().info("資料夾 " + f.getName());
-            }else{
+        for (File f : fileList.listFiles()) {
+            if (f.isFile()) {
                 Bukkit.getServer().getLogger().info("檔案 " + f.getName());
+                schematics.add(new SchematicManager(f.getName()));
             }
         }
     }
