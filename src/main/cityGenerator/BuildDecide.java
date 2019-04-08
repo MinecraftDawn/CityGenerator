@@ -5,7 +5,7 @@ import main.cityGenerator.generator.IGeneratorInfo;
 public class BuildDecide implements IGeneratorInfo {
 
     public static int getBuildType(int x, int y, int z) {
-        return (x / (streetWidth + buildingWidth) + z / (streetWidth + buildingWidth)) % 2;
+        return Math.abs(x / (streetWidth + buildingWidth) + z / (streetWidth + buildingWidth)) % CityGenerator.buildings.size();
     }
 
 }

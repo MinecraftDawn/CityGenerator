@@ -16,12 +16,12 @@ import java.util.LinkedList;
 public class CityGenerator extends JavaPlugin {
 
     public static Plugin plugin;
-    public static LinkedList<SchematicManager> schematics;
+    public static LinkedList<SchematicManager> buildings;
 
     @Override
     public void onEnable() {
         plugin = this;
-        schematics = new LinkedList<>();
+        buildings = new LinkedList<>();
         loadAllSchematic();
     }
 
@@ -47,7 +47,7 @@ public class CityGenerator extends JavaPlugin {
         for (File f : fileList.listFiles()) {
             if (f.isFile()) {
                 Bukkit.getServer().getLogger().info("檔案 " + f.getName());
-                schematics.add(new SchematicManager(f.getName()));
+                buildings.add(new SchematicManager(f.getName()));
             }
         }
     }

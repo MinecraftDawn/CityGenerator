@@ -2,33 +2,17 @@ package main.cityGenerator.generator;
 
 import main.cityGenerator.BuildDecide;
 import main.cityGenerator.CityGenerator;
-import main.cityGenerator.fileProcess.SchematicFileLoader;
 import main.cityGenerator.fileProcess.SchematicReader;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 
-import java.io.File;
 import java.util.Random;
 
 public class BuildingGenerator implements IGenerator {
     @Override
     public ChunkGenerator.ChunkData generate(ChunkGenerator.ChunkData chunk, World world, Random random, int chunkX, int chunkZ, ChunkGenerator.BiomeGrid biome) {
-        File schematicFile = new File(CityGenerator.plugin.getDataFolder() + File.separator + "3.schematic");
-        SchematicFileLoader scheFileLoader = new SchematicFileLoader(schematicFile);
 
-        File schematicFile2 = new File(CityGenerator.plugin.getDataFolder() + File.separator + "5.schematic");
-        SchematicFileLoader scheFileLoader2 = new SchematicFileLoader(schematicFile2);
-
-        SchematicReader scheReader = scheFileLoader.getSchematicInfo();
-
-        /*
-            Test Code
-         */
-        if (BuildDecide.getBuildType(chunkX * 16, 1, chunkZ * 16) == 0) {
-            scheReader = scheFileLoader.getSchematicInfo();
-        } else {
-            scheReader = scheFileLoader2.getSchematicInfo();
-        }
+        SchematicReader scheReader = CityGenerator.buildings.get(BuildDecide.getBuildType(chunkX * 16, 1, chunkZ * 16)).scheInfo;
 
         int scheSizeX = scheReader.getSize().getBlockX();
         int scheSizeZ = scheReader.getSize().getBlockZ();
@@ -53,8 +37,8 @@ public class BuildingGenerator implements IGenerator {
                 } else {//若X與Z同時不在街道範圍
 
                     //若在Schematic範圍
-                    if (modX - streetWidth > buildStartX && modX - streetWidth < buildEndX
-                            && modZ - streetWidth > buildStartZ && modZ - streetWidth < buildEndZ) {
+                    if (modX - streetWidth >= buildStartX && modX - streetWidth < buildEndX
+                            && modZ - streetWidth >= buildStartZ && modZ - streetWidth < buildEndZ) {
 
                         int buildingX = (modX - streetWidth - buildStartX) % scheSizeX;
                         int buildingZ = (modZ - streetWidth - buildStartZ) % scheSizeZ;
