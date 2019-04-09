@@ -42,7 +42,7 @@ public class CityGenerator extends JavaPlugin {
     }
 
     private void loadAllSchematic() {
-        File fileList = new File(plugin.getDataFolder().toString());
+        File fileList = new File(plugin.getDataFolder().toString() + File.separator + "Building");
 
         for (File f : fileList.listFiles()) {
             if (f.isFile()) {
