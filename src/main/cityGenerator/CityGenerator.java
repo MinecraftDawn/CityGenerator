@@ -47,7 +47,7 @@ public class CityGenerator extends JavaPlugin {
         for (File f : fileList.listFiles()) {
             if (f.isFile()) {
                 Bukkit.getServer().getLogger().info("檔案 " + f.getName());
-                buildings.add(new SchematicManager(f.getName()));
+                buildings.add(new SchematicManager(f));
             }
         }
     }

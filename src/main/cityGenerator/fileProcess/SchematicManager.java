@@ -8,9 +8,9 @@ public class SchematicManager {
 
     public SchematicReader scheInfo;
 
-    public SchematicManager(String fileName){
-        File schematicFile = new File(CityGenerator.plugin.getDataFolder()
-                + File.separator + "Building" + File.separator  +fileName);
+    public SchematicManager(File schematicFile){
+//        File schematicFile = new File(CityGenerator.plugin.getDataFolder()
+//                + File.separator + "Building" + File.separator  +fileName);
         SchematicFileLoader scheFileLoader = new SchematicFileLoader(schematicFile);
 
         scheInfo = scheFileLoader.getSchematicInfo();
