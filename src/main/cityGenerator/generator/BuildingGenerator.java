@@ -2,6 +2,7 @@ package main.cityGenerator.generator;
 
 import main.cityGenerator.BuildDecide;
 import main.cityGenerator.CityGenerator;
+import main.cityGenerator.fileProcess.SchematicManager;
 import main.cityGenerator.fileProcess.SchematicReader;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
@@ -12,7 +13,7 @@ public class BuildingGenerator implements IGenerator {
     @Override
     public ChunkGenerator.ChunkData generate(ChunkGenerator.ChunkData chunk, World world, Random random, int chunkX, int chunkZ, ChunkGenerator.BiomeGrid biome) {
 
-        SchematicReader scheReader = CityGenerator.buildings.get(BuildDecide.getBuildType(chunkX * 16, 1, chunkZ * 16)).scheInfo;
+        SchematicReader scheReader = SchematicManager.buildings.get(BuildDecide.getBuildType(chunkX * 16, 1, chunkZ * 16));
 
         int scheSizeX = scheReader.getSize().getBlockX();
         int scheSizeZ = scheReader.getSize().getBlockZ();
