@@ -6,6 +6,7 @@ import com.sk89q.worldedit.schematic.SchematicFormat;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 public class SchematicFileLoader {
 
@@ -30,8 +31,8 @@ public class SchematicFileLoader {
         return cc;
     }
 
-    public SchematicReader getSchematicInfo() {
+    public Optional<SchematicReader> getSchematicInfo() {
         SchematicReader schematicInfo = new SchematicReader(getCuboidClipboard());
-        return schematicInfo;
+        return Optional.ofNullable(schematicInfo);
     }
 }

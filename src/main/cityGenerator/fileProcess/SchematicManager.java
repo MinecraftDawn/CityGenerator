@@ -20,13 +20,13 @@ public abstract class SchematicManager {
             if (f.isFile()) {
                 SchematicFileLoader scheFileLoader = new SchematicFileLoader(f);
 
-                SchematicReader scheInfo = scheFileLoader.getSchematicInfo();
+                SchematicReader scheInfo = scheFileLoader.getSchematicInfo().get();
 
                 if (scheInfo != null) {
                     buildings.add(scheInfo);
+                    Bukkit.getServer().getLogger().info("Schematic檔案讀取成功： " + f.getName());
                 }
 
-                Bukkit.getServer().getLogger().info("Schematic檔案讀取成功： " + f.getName());
             }
         }
     }
