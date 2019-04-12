@@ -1,6 +1,6 @@
 name: cityGenerator
 main: main.cityGenerator.CityGenerator
 version: 0.0.2-alpha
-depend: [WorldEdit]
+depend: [WorldEdit,Multiverse-Core]
 commands:
   test:

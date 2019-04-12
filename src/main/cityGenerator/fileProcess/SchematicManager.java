@@ -26,7 +26,6 @@ public abstract class SchematicManager {
                     buildings.add(scheInfo);
                     Bukkit.getServer().getLogger().info("Schematic檔案讀取成功： " + f.getName());
                 }
-
             }
         }
     }
