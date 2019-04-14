@@ -41,8 +41,18 @@ public class BuildingGenerator implements IGenerator {
                     if (modX - streetWidth >= buildStartX && modX - streetWidth < buildEndX
                             && modZ - streetWidth >= buildStartZ && modZ - streetWidth < buildEndZ) {
 
-                        int buildingX = (modX - streetWidth - buildStartX) % scheSizeX;
-                        int buildingZ = (modZ - streetWidth - buildStartZ) % scheSizeZ;
+                        int buildingX, buildingZ;
+                        if (currentX >= 0) {
+                            buildingX = (modX - streetWidth - buildStartX) % scheSizeX;
+                        } else {
+                            buildingX = scheSizeX - 1 - (modX - streetWidth - buildStartX) % scheSizeX;
+                        }
+
+                        if (currentZ > 0) {
+                            buildingZ = (modZ - streetWidth - buildStartZ) % scheSizeZ;
+                        } else {
+                            buildingZ = scheSizeZ - 1 - (modZ - streetWidth - buildStartZ) % scheSizeZ;
+                        }
 
                         for (int y = 0; y < scheReader.getSize().getBlockY(); y++) {
 
