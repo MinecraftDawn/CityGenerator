@@ -1,7 +1,6 @@
 package main.cityGenerator.generator;
 
 import main.cityGenerator.BuildDecide;
-import main.cityGenerator.CityGenerator;
 import main.cityGenerator.fileProcess.SchematicManager;
 import main.cityGenerator.fileProcess.SchematicReader;
 import org.bukkit.World;
@@ -41,6 +40,7 @@ public class BuildingGenerator implements IGenerator {
                     if (modX - streetWidth >= buildStartX && modX - streetWidth < buildEndX
                             && modZ - streetWidth >= buildStartZ && modZ - streetWidth < buildEndZ) {
 
+                        //判斷座標正負，決定是否要反轉讀取Schematic檔
                         int buildingX, buildingZ;
                         if (currentX >= 0) {
                             buildingX = (modX - streetWidth - buildStartX) % scheSizeX;
@@ -54,6 +54,7 @@ public class BuildingGenerator implements IGenerator {
                             buildingZ = scheSizeZ - 1 - (modZ - streetWidth - buildStartZ) % scheSizeZ;
                         }
 
+                        //建造
                         for (int y = 0; y < scheReader.getSize().getBlockY(); y++) {
 
                             int BlockID = scheReader.getBlockID(buildingX, y, buildingZ);

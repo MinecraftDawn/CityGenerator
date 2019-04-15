@@ -16,14 +16,17 @@ public class SchematicFileLoader {
 
     public SchematicFileLoader(File file) {
         schematic = file;
-        format = SchematicFormat.getFormat(schematic);
-
         try {
+            format = SchematicFormat.getFormat(schematic);
+
             cc = format.load(schematic);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (DataException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Schematic檔案格式錯誤");
+            cc = null;
         }
     }
 
@@ -32,7 +35,9 @@ public class SchematicFileLoader {
     }
 
     public Optional<SchematicReader> getSchematicInfo() {
-        SchematicReader schematicInfo = new SchematicReader(getCuboidClipboard());
+        SchematicReader schematicInfo = null;
+        if(getCuboidClipboard() != null)
+            schematicInfo = new SchematicReader(getCuboidClipboard());
         return Optional.ofNullable(schematicInfo);
     }
 }

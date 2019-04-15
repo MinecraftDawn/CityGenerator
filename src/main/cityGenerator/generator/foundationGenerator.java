@@ -43,7 +43,6 @@ public class foundationGenerator implements IGenerator {
                     //設置建築基底石英磚
                     chunk.setBlock(x, height, z, Material.QUARTZ_BLOCK);
 
-
                     for (int y = 0; y < scheReader.getSize().getBlockY(); y++) {
                         int buildingX = (modX - streetWidth) % scheReader.getSize().getBlockX();
                         int buildingZ = (modZ - streetWidth) % scheReader.getSize().getBlockZ();

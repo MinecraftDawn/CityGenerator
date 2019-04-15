@@ -9,6 +9,9 @@ import java.util.LinkedList;
 public abstract class SchematicManager {
 
     public static LinkedList<SchematicReader> buildings = new LinkedList<>();
+    private static SchematicReader air = new SchematicFileLoader(
+            new File(CityGenerator.plugin.getDataFolder().toString()
+                    + File.separator + "Air.schematic")).getSchematicInfo().get();
 
     public static void loadAllSchematic() {
         buildings = new LinkedList<>();
@@ -20,7 +23,7 @@ public abstract class SchematicManager {
             if (f.isFile()) {
                 SchematicFileLoader scheFileLoader = new SchematicFileLoader(f);
 
-                SchematicReader scheInfo = scheFileLoader.getSchematicInfo().get();
+                SchematicReader scheInfo = scheFileLoader.getSchematicInfo().orElse(air);
 
                 if (scheInfo != null) {
                     buildings.add(scheInfo);
