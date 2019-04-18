@@ -36,8 +36,8 @@ public class BuildingGenerator implements IGenerator {
                 if (modX < streetWidth || modZ < streetWidth) {
                 } else {//若X與Z同時不在街道範圍
 
-                    if (scheSizeX > streetWidth + buildingWidth || scheSizeZ > streetWidth + buildingWidth) continue;
                     //若在Schematic範圍
+                    if (scheSizeX > buildingWidth || scheSizeZ > buildingWidth) continue;
                     if (modX - streetWidth >= buildStartX && modX - streetWidth < buildEndX
                             && modZ - streetWidth >= buildStartZ && modZ - streetWidth < buildEndZ) {
 
