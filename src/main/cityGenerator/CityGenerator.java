@@ -25,6 +25,7 @@ public class CityGenerator extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
+        //從Jar檔內複製檔案出來
         InputStream src = getClass().getResourceAsStream("/main/resource/Air.schematic");
         Path dest = new File(getDataFolder().toString()
                 + File.separator + "Air.schematic").toPath();
