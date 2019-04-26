@@ -1,7 +1,6 @@
 package main.cityGenerator.generator;
 
 import main.cityGenerator.BuildDecide;
-import main.cityGenerator.fileProcess.SchematicManager;
 import main.cityGenerator.fileProcess.SchematicReader;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
@@ -12,7 +11,7 @@ public class BuildingGenerator implements IGenerator {
     @Override
     public ChunkGenerator.ChunkData generate(ChunkGenerator.ChunkData chunk, World world, Random random, int chunkX, int chunkZ, ChunkGenerator.BiomeGrid biome) {
 
-        SchematicReader scheReader = SchematicManager.buildings.get(BuildDecide.getBuildType(chunkX * 16, 1, chunkZ * 16));
+        SchematicReader scheReader = BuildDecide.getBuildType(chunkX * 16, 1, chunkZ * 16);
 
         int scheSizeX = scheReader.getSize().getBlockX();
         int scheSizeZ = scheReader.getSize().getBlockZ();
@@ -21,6 +20,14 @@ public class BuildingGenerator implements IGenerator {
         int buildStartZ = (buildingWidth - scheSizeZ) / 2;
         int buildEndX = (buildingWidth + scheSizeX) / 2;
         int buildEndZ = (buildingWidth + scheSizeZ) / 2;
+
+        //Test Code
+        if (scheSizeX < buildingWidth / 2 && scheSizeX < buildingWidth / 2) {
+            buildStartX = (buildingWidth - scheSizeX) / 2 - 10;
+            buildStartZ = (buildingWidth - scheSizeZ) / 2 - 10;
+            buildEndX = (buildingWidth + scheSizeX) / 2 - 10;
+            buildEndZ = (buildingWidth + scheSizeZ) / 2 - 10;
+        }
 
 
         for (int x = 0; x < 16; x++) {

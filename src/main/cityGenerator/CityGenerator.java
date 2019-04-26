@@ -34,8 +34,6 @@ public class CityGenerator extends JavaPlugin {
         } catch (IOException e) {
         }
 
-
-
         SchematicManager.loadAllSchematic();
 
     }
