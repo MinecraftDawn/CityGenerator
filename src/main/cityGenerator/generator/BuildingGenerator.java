@@ -21,7 +21,7 @@ public class BuildingGenerator implements IGenerator {
         int buildEndX = (buildingWidth + scheSizeX) / 2;
         int buildEndZ = (buildingWidth + scheSizeZ) / 2;
 
-        //Test Code
+        //Test Code 如果schematic檔案太小，把位置重新調整
         if (scheSizeX < buildingWidth / 2 && scheSizeX < buildingWidth / 2) {
             buildStartX = (buildingWidth - scheSizeX) / 2 - 10;
             buildStartZ = (buildingWidth - scheSizeZ) / 2 - 10;
