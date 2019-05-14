@@ -28,14 +28,15 @@ public abstract class SchematicManager implements IGeneratorInfo {
                 SchematicReader scheInfo = scheFileLoader.getSchematicInfo().orElse(air);
 
                 if (scheInfo != null) {
-
-                    if (scheInfo.getSize().getBlockX() < buildingWidth / 4 &&
-                            scheInfo.getSize().getBlockZ() < buildingWidth / 4) {
-                        buildings2.add(scheInfo);
-
-                    } else {
-                        buildings.add(scheInfo);
-                    }
+//TestCode
+//                    if (scheInfo.getSize().getBlockX() < buildingWidth / 4 &&
+//                            scheInfo.getSize().getBlockZ() < buildingWidth / 4) {
+//                        buildings2.add(scheInfo);
+//
+//                    } else {
+//                        buildings.add(scheInfo);
+//                    }
+                    buildings.add(scheInfo);
 
                     Bukkit.getServer().getLogger().info("Schematic檔案讀取成功： " + f.getName());
                 }
