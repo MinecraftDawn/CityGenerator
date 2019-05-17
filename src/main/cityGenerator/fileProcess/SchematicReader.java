@@ -3,11 +3,13 @@ package main.cityGenerator.fileProcess;
 import com.sk89q.worldedit.CuboidClipboard;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.blocks.BaseBlock;
+import main.cityGenerator.generator.IGeneratorInfo;
 
-public class SchematicReader {
+public class SchematicReader implements IGeneratorInfo {
     private int[][][] blockID;
     private byte[][][] blockData;
     private Vector size;
+    private Vector BlockSize;
 
     public SchematicReader(CuboidClipboard cc) {
         int sizeX = cc.getSize().getBlockX();
@@ -17,6 +19,7 @@ public class SchematicReader {
         blockID = new int[sizeX][sizeY][sizeZ];
         blockData = new byte[sizeX][sizeY][sizeZ];
         size = new Vector(sizeX, sizeY, sizeZ);
+        BlockSize = new Vector(sizeX / cubeSize + 1, sizeY / cubeSize + 1, sizeZ / cubeSize + 1);
 
         for (int x = 0; x < sizeX; x++)
             for (int y = 0; y < sizeY; y++)
@@ -38,5 +41,7 @@ public class SchematicReader {
     public Vector getSize() {
         return size;
     }
+
+    public Vector getXZ() { return BlockSize; }
 
 }
