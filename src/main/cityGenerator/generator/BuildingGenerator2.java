@@ -1,6 +1,6 @@
 package main.cityGenerator.generator;
 
-import main.cityGenerator.BuildDecide;
+import main.cityGenerator.BuildDecide2;
 import main.cityGenerator.CityGenerator;
 import main.cityGenerator.fileProcess.SchematicReader;
 import org.bukkit.World;
@@ -12,10 +12,19 @@ public class BuildingGenerator2 implements IGenerator {
     @Override
     public ChunkGenerator.ChunkData generate(ChunkGenerator.ChunkData chunk, World world, Random random, int chunkX, int chunkZ, ChunkGenerator.BiomeGrid biome) {
 
-        SchematicReader scheReader = BuildDecide.getBuildType(chunkX * 16, 1, chunkZ * 16);
-
+        SchematicReader scheReader = BuildDecide2.getBuildType(chunkX * 16, 1, chunkZ * 16);
+        int scheIndex = BuildDecide2.getBuildTypeIndex(chunkX * 16, 1, chunkZ * 16);
         int scheSizeX = scheReader.getSize().getBlockX();
         int scheSizeZ = scheReader.getSize().getBlockZ();
+
+        int sumSizeX = scheSizeX;
+        while (chunkX * 16 % (streetWidth + buildingWidth) > sumSizeX) {
+            scheReader = BuildDecide2.getBuildType(chunkX * 16 + sumSizeX * 50, 1, chunkZ * 16);
+            scheSizeX = scheReader.getSize().getBlockX();
+            scheSizeZ = scheReader.getSize().getBlockZ();
+            sumSizeX += scheSizeX;
+            CityGenerator.plugin.getLogger().info("Test");
+        }
 
         int buildStartX = (int) Math.ceil((double) scheSizeX / 2);
         int buildStartZ = (int) Math.ceil((double) scheSizeZ / 2);
@@ -25,6 +34,7 @@ public class BuildingGenerator2 implements IGenerator {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
 
+
                 int currentX = chunkX * 16 + x;
                 int currentZ = chunkZ * 16 + z;
 
@@ -33,13 +43,12 @@ public class BuildingGenerator2 implements IGenerator {
                 int modZ = Math.abs(currentZ % (buildingWidth + streetWidth));
 
                 if (modX < streetWidth || modZ < streetWidth) {
-
                 } else {//若X與Z同時不在街道範圍
 
                     //若在Schematic範圍
                     if (scheSizeX > buildingWidth || scheSizeZ > buildingWidth) continue;
                     if (modX - streetWidth >= buildStartX
-                            && modZ - streetWidth >= buildStartZ ) {
+                            && modZ - streetWidth >= buildStartZ) {
 
                         //判斷座標正負，決定是否要反轉讀取Schematic檔
                         int buildingX, buildingZ;
