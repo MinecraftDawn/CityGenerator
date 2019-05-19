@@ -21,8 +21,7 @@ public class BuildDecide implements IGeneratorInfo {
 //        Test Code 新的回傳值，用來決定要用哪個Index的Schematic File
         int customX = x / (streetWidth + buildingWidth) - 50000;
         int customZ = z / (streetWidth + buildingWidth) + 50000;
-        int customXm = x % (streetWidth + buildingWidth);
-        int customZm = z % (streetWidth + buildingWidth);
+
 
         Integer index = Math.abs(reverseString(String.valueOf(customX)).hashCode() + new Double(customZ * 1.5).intValue()
         ) % SchematicManager.buildings.size();
