@@ -1,7 +1,6 @@
 package main.cityGenerator.generator;
 
 import main.cityGenerator.BuildDecide2;
-import main.cityGenerator.CityGenerator;
 import main.cityGenerator.fileProcess.SchematicReader;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
@@ -18,13 +17,15 @@ public class BuildingGenerator2 implements IGenerator {
         int scheSizeZ = scheReader.getSize().getBlockZ();
 
         int sumSizeX = scheSizeX;
-        while (chunkX * 16 % (streetWidth + buildingWidth) > sumSizeX) {
+        // 如果目前座標大於sumSize，代表須使用下一個Building
+        while (Math.abs(chunkX * 16 % (streetWidth + buildingWidth)) > sumSizeX) {
             scheReader = BuildDecide2.getBuildType(chunkX * 16 + sumSizeX * 50, 1, chunkZ * 16);
             scheSizeX = scheReader.getSize().getBlockX();
             scheSizeZ = scheReader.getSize().getBlockZ();
             sumSizeX += scheSizeX;
-            CityGenerator.plugin.getLogger().info("Test");
         }
+
+        if (chunkX * 16 % (streetWidth + buildingWidth) + scheSizeX > streetWidth + buildingWidth) return chunk;
 
         int buildStartX = (int) Math.ceil((double) scheSizeX / 2);
         int buildStartZ = (int) Math.ceil((double) scheSizeZ / 2);
@@ -33,7 +34,6 @@ public class BuildingGenerator2 implements IGenerator {
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-
 
                 int currentX = chunkX * 16 + x;
                 int currentZ = chunkZ * 16 + z;
