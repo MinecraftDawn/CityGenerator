@@ -16,24 +16,22 @@ public class BuildingGenerator2 implements IGenerator {
         int scheSizeX = scheReader.getSize().getBlockX();
         int scheSizeZ = scheReader.getSize().getBlockZ();
 
-        int sumSizeX = scheSizeX;
-        // 如果目前座標大於sumSize，代表須使用下一個Building
-        while (Math.abs(chunkX * 16 % (streetWidth + buildingWidth)) > sumSizeX) {
-            scheReader = BuildDecide2.getBuildType(chunkX * 16 + sumSizeX * 50, 1, chunkZ * 16);
-            scheSizeX = scheReader.getSize().getBlockX();
-            scheSizeZ = scheReader.getSize().getBlockZ();
-            sumSizeX += scheSizeX;
-        }
-
-        if (chunkX * 16 % (streetWidth + buildingWidth) + scheSizeX > streetWidth + buildingWidth) return chunk;
-
-        int buildStartX = (int) Math.ceil((double) scheSizeX / 2);
-        int buildStartZ = (int) Math.ceil((double) scheSizeZ / 2);
-        int buildEndX = (int) Math.floor((double) scheSizeX / 2);
-        int buildEndZ = (int) Math.floor((double) scheSizeZ / 2);
-
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
+
+                int sumSizeX = scheSizeX;
+                // 如果目前座標大於sumSize，代表須使用下一個Building
+                while ((Math.abs(chunkX) * 16 + x) % (streetWidth + buildingWidth) > sumSizeX) {
+                    scheReader = BuildDecide2.getBuildType(chunkX * 16 + sumSizeX * 50, 1, chunkZ * 16);
+                    scheSizeX = scheReader.getSize().getBlockX();
+                    scheSizeZ = scheReader.getSize().getBlockZ();
+                    sumSizeX += scheSizeX;
+                }
+
+                int buildStartX = (int) Math.ceil((double) scheSizeX / 2);
+                int buildStartZ = (int) Math.ceil((double) scheSizeZ / 2);
+                int buildEndX = (int) Math.floor((double) scheSizeX / 2);
+                int buildEndZ = (int) Math.floor((double) scheSizeZ / 2);
 
                 int currentX = chunkX * 16 + x;
                 int currentZ = chunkZ * 16 + z;
@@ -62,6 +60,8 @@ public class BuildingGenerator2 implements IGenerator {
                         } else {
                             buildingZ = scheSizeZ - 1 - (modZ - streetWidth - buildStartZ) % scheSizeZ;
                         }
+
+                        if ((modX - streetWidth - buildStartX) / scheSizeX > 0) continue;
 
                         //建造
                         for (int y = 0; y < scheReader.getSize().getBlockY(); y++) {
