@@ -19,19 +19,43 @@ public class BuildingGenerator2 implements IGenerator {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
 
+                int preSizeX = 0;
                 int sumSizeX = scheSizeX;
-                // 如果目前座標大於sumSize，代表須使用下一個Building
-                while ((Math.abs(chunkX) * 16 + x) % (streetWidth + buildingWidth) > sumSizeX) {
+
+                if (Math.abs(chunkX * 16 + x) % (streetWidth + buildingWidth) > sumSizeX) {
                     scheReader = BuildDecide2.getBuildType(chunkX * 16 + sumSizeX * 50, 1, chunkZ * 16);
                     scheSizeX = scheReader.getSize().getBlockX();
                     scheSizeZ = scheReader.getSize().getBlockZ();
+                    preSizeX += scheSizeX;
                     sumSizeX += scheSizeX;
                 }
+//                while(chunkX * 16 + x > sumSizeX){
+//                    scheReader = BuildDecide2.getBuildType(chunkX * 16 + sumSizeX * 50, 1, chunkZ * 16);
+//                    scheSizeX = scheReader.getSize().getBlockX();
+//                    scheSizeZ = scheReader.getSize().getBlockZ();
+//                    preSizeX += scheSizeX;
+//                    sumSizeX += scheSizeX;
+//                }
 
-                int buildStartX = (int) Math.ceil((double) scheSizeX / 2);
+                int buildStartX = preSizeX;
                 int buildStartZ = (int) Math.ceil((double) scheSizeZ / 2);
                 int buildEndX = (int) Math.floor((double) scheSizeX / 2);
                 int buildEndZ = (int) Math.floor((double) scheSizeZ / 2);
+
+//                int sumSizeX = scheSizeX;
+//                // 如果目前座標大於sumSize，代表須使用下一個Building
+//                int a = Math.abs((chunkX * 16) % (streetWidth + buildingWidth)) % 16 ;
+//                while (Math.abs((chunkX * 16 + x) % (streetWidth + buildingWidth)) - a * 16 > sumSizeX) {
+//                    scheReader = BuildDecide2.getBuildType(chunkX * 16 + sumSizeX * 50, 1, chunkZ * 16);
+//                    scheSizeX = scheReader.getSize().getBlockX();
+//                    scheSizeZ = scheReader.getSize().getBlockZ();
+//                    sumSizeX += scheSizeX;
+//                }
+//
+//                int buildStartX = (int) Math.ceil((double) scheSizeX / 2);
+//                int buildStartZ = (int) Math.ceil((double) scheSizeZ / 2);
+//                int buildEndX = (int) Math.floor((double) scheSizeX / 2);
+//                int buildEndZ = (int) Math.floor((double) scheSizeZ / 2);
 
                 int currentX = chunkX * 16 + x;
                 int currentZ = chunkZ * 16 + z;
@@ -45,7 +69,8 @@ public class BuildingGenerator2 implements IGenerator {
 
                     //若在Schematic範圍
                     if (scheSizeX > buildingWidth || scheSizeZ > buildingWidth) continue;
-                    if (modX - streetWidth >= buildStartX
+
+                    if (modX - streetWidth >= buildStartX && sumSizeX < (buildingWidth + streetWidth)
                             && modZ - streetWidth >= buildStartZ) {
 
                         //判斷座標正負，決定是否要反轉讀取Schematic檔
