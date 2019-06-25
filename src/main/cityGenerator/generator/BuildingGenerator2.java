@@ -1,6 +1,7 @@
 package main.cityGenerator.generator;
 
 import main.cityGenerator.BuildDecide2;
+import main.cityGenerator.CityGenerator;
 import main.cityGenerator.fileProcess.SchematicReader;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
@@ -20,15 +21,20 @@ public class BuildingGenerator2 implements IGenerator {
             for (int z = 0; z < 16; z++) {
 
                 int preSizeX = 0;
-                int sumSizeX = scheSizeX;
+                int sumSizeX = scheSizeX + streetWidth;
 
                 if (Math.abs(chunkX * 16 + x) % (streetWidth + buildingWidth) > sumSizeX) {
-                    scheReader = BuildDecide2.getBuildType(chunkX * 16 + sumSizeX * 50, 1, chunkZ * 16);
+                    scheReader = BuildDecide2.getBuildType(chunkX * 16 +  1000, 1, chunkZ * 16);
+                    preSizeX += scheSizeX;
                     scheSizeX = scheReader.getSize().getBlockX();
                     scheSizeZ = scheReader.getSize().getBlockZ();
-                    preSizeX += scheSizeX;
                     sumSizeX += scheSizeX;
                 }
+
+                if (Math.abs(chunkX * 16 + x) % (streetWidth + buildingWidth) > sumSizeX) {
+                    continue;
+                }
+
 //                while(chunkX * 16 + x > sumSizeX){
 //                    scheReader = BuildDecide2.getBuildType(chunkX * 16 + sumSizeX * 50, 1, chunkZ * 16);
 //                    scheSizeX = scheReader.getSize().getBlockX();
@@ -80,7 +86,7 @@ public class BuildingGenerator2 implements IGenerator {
                         } else {
                             buildingX = scheSizeX - 1 - (modX - streetWidth - buildStartX) % scheSizeX;
                         }
-                        if (currentZ > 0) {
+                        if (currentZ >= 0) {
                             buildingZ = (modZ - streetWidth - buildStartZ) % scheSizeZ;
                         } else {
                             buildingZ = scheSizeZ - 1 - (modZ - streetWidth - buildStartZ) % scheSizeZ;
